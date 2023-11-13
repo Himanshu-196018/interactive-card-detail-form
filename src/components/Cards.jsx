@@ -1,6 +1,6 @@
 const Cards = () => {
   return (
-    <div>
+    <div className="section1">
       <div className="card-front">
         <img src="/images/bg-card-front.png" alt="card front" />
       </div>

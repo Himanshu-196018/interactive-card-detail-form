@@ -28,4 +28,16 @@ body,
   min-height: 100vh;
   font-family: "Space Grotesk", sans-serif;
   font-weight: 500;
+  background-color: white;
+}
+
+main {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+
+.section1 {
+  background: url("/images/bg-main-desktop.png") no-repeat;
+  background-size: cover;
+  min-height: 100vh;
 }
