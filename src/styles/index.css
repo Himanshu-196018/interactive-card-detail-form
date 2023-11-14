@@ -84,3 +84,65 @@ main {
   right: 13%;
   font-size: 1.6rem;
 }
+
+.section2 {
+  display: grid;
+  place-content: center;
+}
+
+form {
+  width: 380px;
+  margin-left: 14vh;
+}
+
+label,
+input,
+button {
+  display: block;
+  width: 100%;
+}
+
+label {
+  font-size: 1.4rem;
+  margin-bottom: 3rem;
+  letter-spacing: 1px;
+  color: var(--very-dark-violet);
+}
+
+input {
+  margin-top: 6px;
+  height: 4.5rem;
+  border-radius: 8px;
+  padding-inline: 1.2rem;
+  font-size: 1.8rem;
+  letter-spacing: 0.6px;
+  border: 1px solid var(--light-grayish-violet);
+  color: var(--very-dark-violet);
+
+  &:focus {
+    outline: none;
+    border-color: var(--border2);
+  }
+  &::placeholder {
+    color: var(--light-grayish-violet);
+  }
+}
+
+.double,
+.flex-container {
+  display: flex;
+  column-gap: 2rem;
+}
+
+.flex-container {
+  column-gap: 1rem;
+}
+
+button {
+  height: 5rem;
+  font-size: 1.8rem;
+  border-radius: 8px;
+  border: none;
+  background-color: var(--very-dark-violet);
+  color: var(--white);
+}
