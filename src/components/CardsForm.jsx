@@ -1,8 +1,12 @@
 import Input from "./Input";
 import DateInput from "./DateInput";
 import Button from "./Button";
+import { useStateContext } from "../contexts/ContextProvider";
 
-const CardsForm = ({ cardDetails }) => {
+const CardsForm = () => {
+  const { cardDetails, handleNameChange, handleCardNumber, handleCvc } =
+    useStateContext();
+
   return (
     <div className="section2">
       <form>
@@ -11,12 +15,14 @@ const CardsForm = ({ cardDetails }) => {
           ph={"e.g. Jane Appleseed"}
           type={"text"}
           value={cardDetails.cardholderName}
+          handleChange={handleNameChange}
         />
         <Input
           name={"card-number"}
           ph={"e.g. 1234 5678 9123 0000"}
           type={"number"}
-          value={cardDetails.cardNumer}
+          value={cardDetails.cardNumber}
+          handleChange={handleCardNumber}
         />
         <div className="double">
           <DateInput
@@ -31,6 +37,7 @@ const CardsForm = ({ cardDetails }) => {
             max={999}
             type={"number"}
             value={cardDetails.cvc}
+            handleChange={handleCvc}
           />
         </div>
         <Button text={"Confirm"} />
