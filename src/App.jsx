@@ -1,11 +1,14 @@
 import Cards from "./components/Cards";
 import CardsForm from "./components/CardsForm";
+import { useStateContext } from "./contexts/ContextProvider";
+import Completed from "./components/Completed";
 
 const App = () => {
+  const { completed } = useStateContext();
   return (
     <main>
       <Cards />
-      <CardsForm />
+      {completed ? <Completed /> : <CardsForm />}
     </main>
   );
 };

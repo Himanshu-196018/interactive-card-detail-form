@@ -4,8 +4,13 @@ import Button from "./Button";
 import { useStateContext } from "../contexts/ContextProvider";
 
 const CardsForm = () => {
-  const { cardDetails, handleNameChange, handleCardNumber, handleCvc } =
-    useStateContext();
+  const {
+    cardDetails,
+    handleNameChange,
+    handleCardNumber,
+    handleCvc,
+    handleSubmit,
+  } = useStateContext();
 
   return (
     <div className="section2">
@@ -20,7 +25,7 @@ const CardsForm = () => {
         <Input
           name={"card-number"}
           ph={"e.g. 1234 5678 9123 0000"}
-          type={"number"}
+          type={"text"}
           value={cardDetails.cardNumber}
           handleChange={handleCardNumber}
         />
@@ -40,7 +45,7 @@ const CardsForm = () => {
             handleChange={handleCvc}
           />
         </div>
-        <Button text={"Confirm"} />
+        <Button text={"Confirm"} handleClick={handleSubmit} />
       </form>
     </div>
   );

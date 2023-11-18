@@ -11,6 +11,7 @@ const details = {
 
 export const ContextProvider = ({ children }) => {
   const [cardDetails, setCardDetails] = useState(details);
+  const [completed, setCompleted] = useState(false);
 
   const handleNameChange = (e) => {
     setCardDetails({
@@ -22,7 +23,7 @@ export const ContextProvider = ({ children }) => {
   const handleCardNumber = (e) => {
     setCardDetails({
       ...cardDetails,
-      cardNumber: e.target.value.slice(0, 16),
+      cardNumber: e.target.value.slice(0, 16).toUpperCase(),
     });
   };
 
@@ -33,6 +34,10 @@ export const ContextProvider = ({ children }) => {
     });
   };
 
+  const handleSubmit = () => {
+    setCompleted(!completed);
+  };
+
   return (
     <StateContext.Provider
       value={{
@@ -40,6 +45,8 @@ export const ContextProvider = ({ children }) => {
         handleNameChange,
         handleCardNumber,
         handleCvc,
+        completed,
+        handleSubmit,
       }}
     >
       {children}
