@@ -10,6 +10,7 @@ const CardsForm = () => {
     handleCardNumber,
     handleCvc,
     handleSubmit,
+    error,
   } = useStateContext();
 
   return (
@@ -19,6 +20,7 @@ const CardsForm = () => {
           name={"cardholder-name"}
           ph={"e.g. Jane Appleseed"}
           type={"text"}
+          error={error.cardholderName}
           value={cardDetails.cardholderName}
           handleChange={handleNameChange}
         />
@@ -26,6 +28,7 @@ const CardsForm = () => {
           name={"card-number"}
           ph={"e.g. 1234 5678 9123 0000"}
           type={"text"}
+          error={error.cardNumber}
           value={cardDetails.cardNumber}
           handleChange={handleCardNumber}
         />
@@ -41,6 +44,7 @@ const CardsForm = () => {
             ph={"e.g. 123"}
             max={999}
             type={"number"}
+            error={error.cvc}
             value={cardDetails.cvc}
             handleChange={handleCvc}
           />

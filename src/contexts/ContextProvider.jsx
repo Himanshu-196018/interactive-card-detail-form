@@ -9,9 +9,30 @@ const details = {
   cvc: "",
 };
 
+const errorDetails = {
+  cardholderName: {
+    haveError: false,
+    errorText: "",
+  },
+  cardNumber: {
+    haveError: false,
+    errorText: "",
+  },
+  expDate: {
+    haveError1: false,
+    haveError2: false,
+    errorText: "",
+  },
+  cvc: {
+    haveError: false,
+    errorText: "",
+  },
+};
+
 export const ContextProvider = ({ children }) => {
   const [cardDetails, setCardDetails] = useState(details);
   const [completed, setCompleted] = useState(false);
+  const [error, setError] = useState(errorDetails);
 
   const handleNameChange = (e) => {
     setCardDetails({
@@ -47,6 +68,7 @@ export const ContextProvider = ({ children }) => {
         handleCvc,
         completed,
         handleSubmit,
+        error,
       }}
     >
       {children}

@@ -1,4 +1,4 @@
-const Input = ({ name, ph, type, max, value, handleChange }) => {
+const Input = ({ name, ph, type, max, value, handleChange, error }) => {
   return (
     <label htmlFor={name}>
       {name.replace("-", " ").toUpperCase() + " "}
@@ -8,7 +8,9 @@ const Input = ({ name, ph, type, max, value, handleChange }) => {
         placeholder={ph}
         value={value}
         onChange={handleChange}
+        className={error.haveError ? ".error" : ""}
       />
+      <p>{error.errorText}</p>
     </label>
   );
 };
