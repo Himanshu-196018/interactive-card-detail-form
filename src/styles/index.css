@@ -153,10 +153,6 @@ button {
   color: var(--white);
 }
 
-.completed-container {
-  text-align: center;
-}
-
 label p {
   color: var(--red);
   font-size: 1.3rem;
@@ -166,4 +162,20 @@ label p {
 
 .error {
   border: 1px solid var(--red);
+}
+
+.completed-container {
+  text-align: center;
+}
+
+h1 {
+  margin-top: 3rem;
+  letter-spacing: 3px;
+  font-weight: 300;
+  color: var(--very-dark-violet);
+}
+
+.completed-container p {
+  margin-block: 1.4rem 5rem;
+  color: var(--dark-grayish-violet);
 }

@@ -55,8 +55,53 @@ export const ContextProvider = ({ children }) => {
     });
   };
 
-  const handleSubmit = () => {
-    setCompleted(!completed);
+  function checkValidInput() {
+    const copyError = JSON.parse(JSON.stringify(errorDetails));
+    // checking error in cardholder Name
+    if (cardDetails.cardholderName === "") {
+      copyError.cardholderName = {
+        haveError: true,
+        errorText: "Can't be blank",
+      };
+    } else {
+      copyError.cardholderName = errorDetails.cardholderName;
+    }
+
+    // checking error in card number
+    if (cardDetails.cardNumber === "") {
+      copyError.cardNumber = {
+        haveError: true,
+        errorText: "Can't be blank",
+      };
+    } else if (cardDetails.cardNumber.length < 16) {
+      copyError.cardNumber = {
+        haveError: true,
+        errorText: "Should contain 16 digit",
+      };
+    } else if (!/\d/.test(cardDetails.cardNumber)) {
+      copyError.cardNumber = {
+        haveError: true,
+        errorText: "Wrong format, numbers only",
+      };
+    } else {
+      copyError.cardNumber = errorDetails.cardNumber;
+    }
+
+    setError(copyError);
+  }
+
+  const handleSubmit = (e) => {
+    checkValidInput();
+    e.preventDefault();
+
+    if (error === errorDetails) {
+      setCompleted(true);
+    }
+  };
+
+  const handleContinue = () => {
+    setCardDetails(details);
+    setCompleted(false);
   };
 
   return (
@@ -69,6 +114,7 @@ export const ContextProvider = ({ children }) => {
         completed,
         handleSubmit,
         error,
+        handleContinue,
       }}
     >
       {children}
