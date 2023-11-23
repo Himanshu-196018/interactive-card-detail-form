@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const StateContext = createContext();
 
@@ -56,7 +56,7 @@ export const ContextProvider = ({ children }) => {
   };
 
   function checkValidInput() {
-    const copyError = JSON.parse(JSON.stringify(errorDetails));
+    const copyError = { ...errorDetails };
     // checking error in cardholder Name
     if (cardDetails.cardholderName === "") {
       copyError.cardholderName = {
@@ -87,20 +87,37 @@ export const ContextProvider = ({ children }) => {
       copyError.cardNumber = errorDetails.cardNumber;
     }
 
+    if (cardDetails.cvc === "") {
+      copyError.cvc = {
+        haveError: true,
+        errorText: "Can't be blank",
+      };
+    } else if (cardDetails.cvc.length < 3) {
+      copyError.cvc = {
+        haveError: true,
+        errorText: "Should be 3 digit long",
+      };
+    } else {
+      copyError.cvc = errorDetails.cvc;
+    }
+
     setError(copyError);
   }
 
   const handleSubmit = (e) => {
-    checkValidInput();
     e.preventDefault();
-
-    if (error === errorDetails) {
-      setCompleted(true);
-    }
+    checkValidInput();
+    setError((prevError) => {
+      if (!Object.values(prevError).some((field) => field.haveError)) {
+        setCompleted(true);
+      }
+      return prevError;
+    });
   };
 
   const handleContinue = () => {
     setCardDetails(details);
+    setError(errorDetails);
     setCompleted(false);
   };
 
