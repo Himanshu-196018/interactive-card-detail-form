@@ -8,7 +8,7 @@ const Input = ({ name, ph, type, max, value, handleChange, error }) => {
         placeholder={ph}
         value={value}
         onChange={handleChange}
-        className={error.haveError ? ".error" : ""}
+        className={error.haveError ? "error" : ""}
       />
       <p>{error.errorText}</p>
     </label>

@@ -29,6 +29,8 @@ const errorDetails = {
   },
 };
 
+const year = new Date().getFullYear() % 100;
+
 export const ContextProvider = ({ children }) => {
   const [cardDetails, setCardDetails] = useState(details);
   const [completed, setCompleted] = useState(false);
@@ -45,6 +47,19 @@ export const ContextProvider = ({ children }) => {
     setCardDetails({
       ...cardDetails,
       cardNumber: e.target.value.slice(0, 16).toUpperCase(),
+    });
+  };
+
+  const handleMonthChange = (e) => {
+    setCardDetails({
+      ...cardDetails,
+      expDate: [e.target.value.slice(0, 2), cardDetails.expDate[1]],
+    });
+  };
+  const handleYearChange = (e) => {
+    setCardDetails({
+      ...cardDetails,
+      expDate: [cardDetails.expDate[0], e.target.value.slice(0, 2)],
     });
   };
 
@@ -78,13 +93,27 @@ export const ContextProvider = ({ children }) => {
         haveError: true,
         errorText: "Should contain 16 digit",
       };
-    } else if (!/\d/.test(cardDetails.cardNumber)) {
+    } else if (/\D/.test(cardDetails.cardNumber)) {
       copyError.cardNumber = {
         haveError: true,
         errorText: "Wrong format, numbers only",
       };
     } else {
       copyError.cardNumber = errorDetails.cardNumber;
+    }
+
+    if (cardDetails.expDate[0] === "" || cardDetails.expDate[1] === "") {
+      copyError.expDate = {
+        haveError1: cardDetails.expDate[0] ? false : true,
+        haveError2: cardDetails.expDate[1] ? false : true,
+        errorText: "Can't be blank",
+      };
+    } else if (cardDetails.expDate[0] > 12 || cardDetails.expDate[1] <= year) {
+      copyError.expDate = {
+        haveError1: cardDetails.expDate[0] > 12 ? true : false,
+        haveError2: cardDetails.expDate[1] <= year ? true : false,
+        errorText: "Should be a valid exp Date",
+      };
     }
 
     if (cardDetails.cvc === "") {
@@ -108,7 +137,11 @@ export const ContextProvider = ({ children }) => {
     e.preventDefault();
     checkValidInput();
     setError((prevError) => {
-      if (!Object.values(prevError).some((field) => field.haveError)) {
+      if (
+        !Object.values(prevError).some(
+          (field) => field.haveError || field.haveError1 || field.haveError2
+        )
+      ) {
         setCompleted(true);
       }
       return prevError;
@@ -127,6 +160,8 @@ export const ContextProvider = ({ children }) => {
         cardDetails,
         handleNameChange,
         handleCardNumber,
+        handleMonthChange,
+        handleYearChange,
         handleCvc,
         completed,
         handleSubmit,
