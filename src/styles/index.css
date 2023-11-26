@@ -34,27 +34,41 @@ body,
 
 main {
   display: grid;
-  grid-template-columns: 1fr 2fr;
 }
 
 .section1 {
-  background: url("/images/bg-main-desktop.png") no-repeat;
+  background: url("/images/bg-main-mobile.png") no-repeat center;
   background-size: cover;
-  min-height: 100vh;
-  display: grid;
-  place-content: center;
-  row-gap: 3rem;
   color: var(--white);
+  position: relative;
+  height: 240px;
+  padding: 3rem 2rem;
+  display: grid;
+  justify-content: center;
 }
 
 .card-front,
 .card-back {
   position: relative;
-  left: 10vw;
+}
+
+.card-front img,
+.card-back img {
+  width: 100%;
+  max-width: 290px;
+}
+
+.card-front {
+  top: -7rem;
+  grid-row: 2/3;
+  z-index: 2;
+  left: -30px;
 }
 
 .card-back {
-  left: 17vw;
+  grid-row: 1/2;
+  z-index: 1;
+  left: 30px;
 }
 
 .card-front-info {
@@ -63,37 +77,41 @@ main {
   left: 0;
   right: 0;
   bottom: 0;
-  margin: 3.2rem;
+  padding: 1.6rem 2.4rem;
+}
+
+.card-front-info img {
+  width: 55px;
 }
 
 .card-number {
-  margin-top: 5.6rem;
-  font-size: 3rem;
+  margin-top: 3rem;
   letter-spacing: 2px;
 }
 
 .bottom-info {
-  margin-top: 2.2rem;
+  margin-top: 1.8rem;
+  font-size: 1rem;
   display: flex;
   justify-content: space-between;
 }
 
 .card-back-info {
   position: absolute;
-  top: 44%;
-  right: 13%;
-  font-size: 1.6rem;
+  top: 70px;
+  right: 40px;
+  font-size: 1.4rem;
 }
 
 .section2 {
+  margin-block: 10rem 3rem;
   display: grid;
   place-content: center;
 }
 
 form,
 .completed-container {
-  width: 380px;
-  margin-left: 14vh;
+  width: 325px;
 }
 
 label,
@@ -178,4 +196,55 @@ h1 {
 .completed-container p {
   margin-block: 1.4rem 5rem;
   color: var(--dark-grayish-violet);
+}
+
+/* medium device stying */
+@media screen and (width > 500px) {
+  .card-front img,
+  .card-back img {
+    max-width: unset;
+  }
+
+  .card-number {
+    font-size: 3rem;
+  }
+}
+
+/* desktop styling */
+@media screen and (width > 1110px) {
+  main {
+    grid-template-columns: 1fr 2fr;
+  }
+
+  .section1 {
+    background: url("/images/bg-main-desktop.png") no-repeat center;
+    background-size: cover;
+    min-height: 100vh;
+    place-content: center;
+    row-gap: 3rem;
+  }
+
+  .card-front,
+  .card-back {
+    left: 10vw;
+  }
+
+  .card-front {
+    grid-row: 1/2;
+    top: 0;
+  }
+  .card-back {
+    grid-row: 2/3;
+    left: 17vw;
+  }
+
+  .section2 {
+    margin-block: 0;
+    margin-left: 9vw;
+  }
+
+  form,
+  .completed-container {
+    width: 380px;
+  }
 }
