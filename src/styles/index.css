@@ -202,11 +202,32 @@ h1 {
 @media screen and (width > 500px) {
   .card-front img,
   .card-back img {
-    max-width: unset;
+    max-width: 450px;
+  }
+
+  .card-front-info {
+    padding: 2.8rem 3.2rem;
+  }
+
+  .card-front-info img {
+    width: 85px;
   }
 
   .card-number {
+    margin-top: 5.4rem;
     font-size: 3rem;
+  }
+
+  .bottom-info {
+    margin-top: 2.6rem;
+    font-size: 1.6rem;
+    letter-spacing: 1px;
+  }
+
+  .card-back-info {
+    top: 43%;
+    right: 15%;
+    font-size: 1.8rem;
   }
 }
 
@@ -235,9 +256,8 @@ h1 {
   }
   .card-back {
     grid-row: 2/3;
-    left: 17vw;
+    left: 16.5vw;
   }
-
   .section2 {
     margin-block: 0;
     margin-left: 9vw;
