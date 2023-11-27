@@ -1,7 +1,8 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 const StateContext = createContext();
 
+// initial Data to make a state
 const details = {
   cardholderName: "",
   cardNumber: "",
@@ -31,11 +32,16 @@ const errorDetails = {
 
 const year = new Date().getFullYear() % 100;
 
+// creating custom hooks to manage state globally with useContext hook
 export const ContextProvider = ({ children }) => {
+  // declaring states
   const [cardDetails, setCardDetails] = useState(details);
   const [completed, setCompleted] = useState(false);
   const [error, setError] = useState(errorDetails);
 
+  /* **************************************** */
+  // handling input details for form
+  /* **************************************** */
   const handleNameChange = (e) => {
     setCardDetails({
       ...cardDetails,
@@ -70,8 +76,12 @@ export const ContextProvider = ({ children }) => {
     });
   };
 
+  /* **************************************** */
+  // function to validate form details
+  /* **************************************** */
   function checkValidInput() {
     const copyError = { ...errorDetails };
+
     // checking error in cardholder Name
     if (cardDetails.cardholderName === "") {
       copyError.cardholderName = {
@@ -102,6 +112,7 @@ export const ContextProvider = ({ children }) => {
       copyError.cardNumber = errorDetails.cardNumber;
     }
 
+    // checking error in exp Date
     if (cardDetails.expDate[0] === "" || cardDetails.expDate[1] === "") {
       copyError.expDate = {
         haveError1: cardDetails.expDate[0] ? false : true,
@@ -114,8 +125,11 @@ export const ContextProvider = ({ children }) => {
         haveError2: cardDetails.expDate[1] <= year ? true : false,
         errorText: "Should be a valid exp Date",
       };
+    } else {
+      copyError.expDate = errorDetails.expDate;
     }
 
+    // checking for error in cvc
     if (cardDetails.cvc === "") {
       copyError.cvc = {
         haveError: true,
@@ -133,6 +147,9 @@ export const ContextProvider = ({ children }) => {
     setError(copyError);
   }
 
+  /* **************************************** */
+  // function to handle submit button
+  /* **************************************** */
   const handleSubmit = (e) => {
     e.preventDefault();
     checkValidInput();
@@ -174,4 +191,5 @@ export const ContextProvider = ({ children }) => {
   );
 };
 
+// exporting custom hook useStateContext
 export const useStateContext = () => useContext(StateContext);

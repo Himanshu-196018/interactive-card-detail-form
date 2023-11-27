@@ -35,7 +35,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: [Solution](https://github.com/Himanshu-196018/interactive-card-detail-form)
-- Live Site URL: [Demo/site](")
+- Live Site URL: [Demo/site](https://interactive-card-detail-form-himanshu.netlify.app/)
 
 ## My process
 

@@ -25,6 +25,8 @@ html {
 body,
 #root {
   font-size: 1.8rem;
+  width: 100%;
+  min-width: 375px;
   height: 100%;
   min-height: 100vh;
   font-family: "Space Grotesk", sans-serif;
@@ -199,9 +201,14 @@ h1 {
 }
 
 /* medium device stying */
-@media screen and (width > 500px) {
+@media screen and (width > 560px) {
+  .section1 {
+    height: 400px;
+  }
+
   .card-front img,
   .card-back img {
+    width: 450px;
     max-width: 450px;
   }
 
